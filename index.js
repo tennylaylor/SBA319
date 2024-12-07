@@ -11,7 +11,9 @@ app.use(express.urlencoded({ extended: true }));
 // MongoDB Connection
 mongoose
   .connect(process.env.MONGO_URI)
-
+  //    useNewUrlParser: true,
+  //    useUnifiedTopology: true,  //no longer needed
+  //  })
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
@@ -23,20 +25,18 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 ////====================================================================
 
-const birds = require("./models/bird");
-const fishs = require("./models/fish");
-const trees = require("./models/tree");
+const Bird = require("./models/Bird");
+const Fish = require("./models/Fish");
+const Tree = require("./models/Tree");
 
 // Sample data insertion (optional for testing)
 async function insertSampleData() {
   try {
-    await birds.create([
-      { name: "Sparrow", habitat: "Urban", diet: "omnivore" },
+    await Bird.create([
+      { name: "Sparrow", habitat: "Urban", diet: "Omnivore" },
     ]);
-    await fishs.create([
-      { name: "Clownfish", waterType: "saltwater", size: 4 },
-    ]);
-    await trees.create([{ name: "oak", height: 50, age: 100 }]);
+    await Fish.create([{ name: "Clownfish", waterType: "Saltwater", size: 4 }]);
+    await Tree.create([{ name: "Oak", height: 50, age: 100 }]);
     console.log("Sample data inserted successfully");
   } catch (error) {
     console.error("Error inserting sample data:", error.message);

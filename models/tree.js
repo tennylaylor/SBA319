@@ -11,11 +11,11 @@ const treeSchema = new mongoose.Schema(
     height: {
       type: Number,
       required: true,
-      min: 1, // feet
+      min: 1, // Minimum height in feet
     },
     age: {
       type: Number,
-      default: 0, //  age is 0
+      default: 0, // Default age is 0 if not specified
     },
   },
   { timestamps: true }
@@ -23,4 +23,4 @@ const treeSchema = new mongoose.Schema(
 
 treeSchema.index({ height: -1 }); // Index for sorting trees by height in descending order
 
-module.exports = mongoose.model("tree", treeSchema);
+module.exports = mongoose.model("Tree", treeSchema);

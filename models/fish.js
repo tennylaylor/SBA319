@@ -11,17 +11,17 @@ const fishSchema = new mongoose.Schema(
     waterType: {
       type: String,
       required: true,
-      enum: ["freshwater", "saltwater"],
+      enum: ["Freshwater", "Saltwater"], // Ensures consistency
     },
     size: {
       type: Number,
-      min: 1,
-      max: 500,
+      min: 1, // Minimum size in inches
+      max: 500, // Maximum size (e.g., whale shark)
     },
   },
   { timestamps: true }
 );
 
-fishSchema.index({ waterType: 1 });
+fishSchema.index({ waterType: 1 }); // Index for frequent queries by water type
 
-module.exports = mongoose.model("fish", fishSchema);
+module.exports = mongoose.model("Fish", fishSchema);
