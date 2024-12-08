@@ -43,4 +43,18 @@ async function insertSampleData() {
   }
 }
 
+async function insertSampleData() {
+  try {
+    // Clear the birds collection (optional for testing)
+    await Bird.deleteMany({});
+    // Insert new data
+    await Bird.create([
+      { name: "Sparrow", habitat: "Urban", diet: "Omnivore" },
+    ]);
+    console.log("Sample data inserted successfully");
+  } catch (error) {
+    console.error("Error inserting sample data:", error.message);
+  }
+}
+
 mongoose.connection.once("open", insertSampleData);
