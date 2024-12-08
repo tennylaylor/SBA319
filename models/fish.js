@@ -21,7 +21,9 @@ const fishSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+//================================================================
 
+//================================================================
 fishSchema.index({ waterType: 1 }); // Index for frequent queries by water type
 
 module.exports = mongoose.model("Fish", fishSchema);

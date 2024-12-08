@@ -1,3 +1,4 @@
+const { Router } = require("express");
 const mongoose = require("mongoose");
 
 const birdSchema = new mongoose.Schema(
@@ -19,6 +20,9 @@ const birdSchema = new mongoose.Schema(
   },
   { timestamps: true }
 ); // Adds createdAt and updatedAt timestamps
+//================================
+
+//================================================================
 
 // Create an index on the name field for quick lookups
 birdSchema.index({ name: 1 });

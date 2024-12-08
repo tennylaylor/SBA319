@@ -21,6 +21,10 @@ const treeSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+//============================================================================
+
+//============================================================================
+
 treeSchema.index({ height: -1 }); // Index for sorting trees by height in descending order
 
 module.exports = mongoose.model("Tree", treeSchema);
