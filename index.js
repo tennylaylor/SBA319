@@ -1,12 +1,10 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const app = express();
 
-// Import models
-const Bird = require("./models/Bird");
-const Fish = require("./models/Fish");
-const Tree = require("./models/Tree");
+const BirdRoutes = require("./routes/BirdRoutes");
+
+const app = express();
 
 const PORT = process.env.PORT || 3000;
 
@@ -26,49 +24,81 @@ mongoose
 // Sample route
 app.get("/", (req, res) => res.send("API is working"));
 
-//CRUD routes================================================================
-// Get all birds
-app.get("/Bird", async (req, res) => {
+// CRUD routes2================================================================
+app.use("/birds", BirdRoutes); //all bird route
+
+//CRUD routes============test====================================================
+
+// Import models
+async function insertSampleData() {
   try {
-    const birds = await Bird.find(); // Use 'birds' for response
+    const Bird = require("./models/Bird");
+    const Fish = require("./models/Fish");
+    const Tree = require("./models/Tree");
+
+    //Ceare Data
+    await Bird.deleteMany({});
+    await Fish.deleteMany({});
+    await Tree.deleteMany({});
+
+    await Bird.create([
+      { name: "Sparrow", habitat: "Urban", diet: "Omnivore" },
+    ]);
+    await Fish.create([{ name: "Clownfish", waterType: "Saltwater", size: 4 }]);
+    await Tree.create([{ name: "Oak", height: 50, age: 100 }]);
+
+    console.log("Sample data inserted successfully");
+  } catch (error) {
+    console.error("Error inserting sample data:", error.message);
+  }
+}
+
+mongoose.connection.once("open", insertSampleData);
+// Start server
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// Get all birds
+/*app.get("/bird", async (req, res) => {
+  try {
+    const birds = await bird.find(); // Use 'birds' for response
     res.status(200).json(birds);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-});
+});*/
 
 // Add a new bird
-app.post("/Bird", async (req, res) => {
+/*app.post("/bird", async (req, res) => {
   try {
-    const Bird = new Bird(req.body);
-    await Bird.save();
-    res.status(201).json(Bird);
+    const bird = new Bird(req.body);
+    await bird.save();
+    res.status(201).json(bird);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
-});
+});*/
 
 //===================================================================
 
 // Delete birds
-app.delete("/Bird/:id", async (req, res) => {
+/*app.delete("/bird/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const deletedBird = await Bird.findByIdAndDelete(id);
+    const deletedBird = await bird.findByIdAndDelete(id);
     if (!deletedBird)
       return res.status(404).json({ message: "Bird not found" });
     res.status(200).json({ message: "Bird deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-});
+});*/
 
 // Update a bird by ID
 
-app.put("/Bird/:id", async (req, res) => {
+/*app.put("/bird/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedBird = await Bird.findByIdAndUpdate(id, req.body, {
+    const updatedBird = await bird.findByIdAndUpdate(id, req.body, {
       new: true,
     });
     if (!updatedBird)
@@ -84,18 +114,9 @@ app.put("/Bird/:id", async (req, res) => {
 // Sample data insertion (optional for testing)
 async function insertSampleData() {
   try {
-    await Bird.create([
-      { name: "Sparrow", habitat: "Urban", diet: "Omnivore" },
-    ]);
-    await Fish.create([{ name: "Clownfish", waterType: "Saltwater", size: 4 }]);
-    await Tree.create([{ name: "Oak", height: 50, age: 100 }]);
-    console.log("Sample data inserted successfully");
-  } catch (error) {
-    console.error("Error inserting sample data:", error.message);
-  }
-}
+   
 
-async function insertSampleData() {
+  //async function insertSampleData() {
   try {
     // Clear the birds collection (optional for testing)
     await Bird.deleteMany({});
@@ -107,8 +128,4 @@ async function insertSampleData() {
   } catch (error) {
     console.error("Error inserting sample data:", error.message);
   }
-}
-
-mongoose.connection.once("open", insertSampleData);
-// Start server
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}*/
