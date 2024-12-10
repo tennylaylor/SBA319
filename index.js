@@ -3,7 +3,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const BirdRoutes = require("./routes/BirdRoutes");
-
+const FishRoutes = require("./routes/FishRoutes");
+const TreeRoutes = require("./routes/TreeRoutes");
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -25,8 +26,9 @@ mongoose
 app.get("/", (req, res) => res.send("API is working"));
 
 // CRUD routes2================================================================
-app.use("/birds", BirdRoutes); //all bird route
-
+app.use("/birds", BirdRoutes);
+app.use("/fish", FishRoutes);
+app.use("/trees", TreeRoutes);
 //CRUD routes============test====================================================
 
 // Import models
