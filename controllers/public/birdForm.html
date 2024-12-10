@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bird Management</title>
+  </head>
+  <body>
+    <h1>Bird Management</h1>
+
+    <!-- Add a Bird -->
+    <h2>Add Bird</h2>
+    <form action="/birds" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required /><br /><br />
+
+      <label for="habitat">Habitat:</label>
+      <input type="text" id="habitat" name="habitat" required /><br /><br />
+
+      <label for="diet">Diet:</label>
+      <select id="diet" name="diet" required>
+        <option value="Herbivore">Herbivore</option>
+        <option value="Carnivore">Carnivore</option>
+        <option value="Omnivore">Omnivore</option></select
+      ><br /><br />
+
+      <button type="submit">Add Bird</button>
+    </form>
+
+    <!-- Delete a Bird -->
+    <h2>Delete Bird</h2>
+    <form action="/birds/delete" method="POST">
+      <label for="id">Bird ID:</label>
+      <input type="text" id="id" name="id" required /><br /><br />
+      <button type="submit">Delete Bird</button>
+    </form>
+  </body>
+</html>

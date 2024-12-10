@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fish Management</title>
+  </head>
+  <body>
+    <h1>Fish Management</h1>
+
+    <!-- Add a Fish -->
+    <h2>Add Fish</h2>
+    <form action="/fish" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required /><br /><br />
+
+      <label for="waterType">Water Type:</label>
+      <select id="waterType" name="waterType" required>
+        <option value="Freshwater">Freshwater</option>
+        <option value="Saltwater">Saltwater</option></select
+      ><br /><br />
+
+      <label for="size">Size (cm):</label>
+      <input type="number" id="size" name="size" min="1" required /><br /><br />
+
+      <button type="submit">Add Fish</button>
+    </form>
+
+    <!-- Delete a Fish -->
+    <h2>Delete Fish</h2>
+    <form action="/fish/delete" method="POST">
+      <label for="id">Fish ID:</label>
+      <input type="text" id="id" name="id" required /><br /><br />
+      <button type="submit">Delete Fish</button>
+    </form>
+  </body>
+</html>

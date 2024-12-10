@@ -61,4 +61,16 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// Delete a bird POST
+router.post("/delete", async (req, res) => {
+  try {
+    const { id } = req.body; // Get ID from form data
+    const deletedBird = await Bird.findByIdAndDelete(id);
+    if (!deletedBird) return res.status(404).send("Bird not found");
+    res.send("Bird deleted successfully");
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
 module.exports = router;

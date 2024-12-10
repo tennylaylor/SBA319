@@ -61,4 +61,16 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// Delete a bird via POST (for form submissions)
+router.post("/delete", async (req, res) => {
+  try {
+    const { id } = req.body; // Get ID from form data
+    const deletedTree = await Tree.findByIdAndDelete(id);
+    if (!deletedTree) return res.status(404).send("Tree not found");
+    res.send("Tree deleted successfully");
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
 module.exports = router;
